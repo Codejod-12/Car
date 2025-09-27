@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeMotor - Premium Luxury Cars</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #fbbf24, #f97316);
+            --dark-bg: #111827;
+            --light-gray: #f9fafb;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --white: #ffffff;
+            --border-gray: #e5e7eb;
+        }
+
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .animate-slide-in-left {
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .animate-slide-in-right {
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Header */
+        .header {
+            background:rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-gray);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .logo::before {
+            content: "🚗";
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #f97316;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-btn {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(251, 191, 36, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBjYXJzJTIwc2hvd3Jvb218ZW58MXx8fHwxNzU4NTYyNzQwfDA&ixlib=rb-4.1.0&q=80&w=1080') center/cover;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: #d1d5db;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        .stat-label {
+            color: #9ca3af;
+            margin-top: 0.5rem;
+        }
+
+        /* Featured Cars Section */
+        .featured-cars {
+            padding: 5rem 2rem;
+            background: var(--light-gray);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .section-title .highlight {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .car-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .car-image {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .car-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .car-card:hover .car-image::before {
+            opacity: 1;
+        }
+
+        .car-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .car-info {
+            padding: 1.5rem;
+        }
+
+        .car-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .car-name {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .car-details {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .car-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .car-specs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .spec {
+            text-align: center;
+            padding: 0.5rem;
+            background: var(--light-gray);
+            border-radius: 8px;
+        }
+
+        .spec-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            display: block;
+        }
+
+        .spec-value {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .car-features {
+            margin-bottom: 1rem;
+        }
+
+        .feature-tag {
+            display: inline-block;
+            background: #e5e7eb;
+            color: var(--text-dark);
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin: 0.125rem;
+        }
+
+        /* Catalog Section */
+        .catalog {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .catalog-filters {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .filter-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #f97316;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--light-gray);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .filter-btn:hover {
+            border-color: #f97316;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 2rem;
+            background: var(--light-gray);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .service-features {
+            list-style: none;
+        }
+
+        .service-features li {
+            padding: 0.25rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .service-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #f97316;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .contact-item-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-gradient);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-bg);
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #fbbf24;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #d1d5db;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: #fbbf24;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cars-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .filter-controls {
+                flex-direction: column;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 6rem 1rem 3rem;
+            }
+
+            .featured-cars,
+            .catalog,
+            .services,
+            .contact {
+                padding: 3rem 1rem;
+            }
+
+            .cars-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .car-card {
+                margin: 0 auto;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav">
+            <a href="#home" class="logo">LuxeMotor</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="#">Home</a></li>
+                <li><a href="model.html" class="#">Model</a></li>
+                <li><a href="about.html" class="#">About</a></li>
+                <li><a href="services.html" class="#">Services</a></li>
+                <li><a href="contact.html" class="#">Contact</a></li>
+            </ul>
+            <a href="#contact" class="cta-btn">Get Quote</a>
+            <button class="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content animate-fade-in-up">
+            <h1>Premium Luxury Cars</h1>
+            <p>Discover the world's most exclusive automobiles. From supercars to luxury sedans, find your perfect match in our curated collection of premium vehicles.</p>
+            <a href="#featured" class="cta-btn">Explore Collection</a>
+            
+            <div class="hero-stats">
+                <div class="stat animate-fade-in-up">
+                    <span class="stat-number">30+</span>
+                    <div class="stat-label">Premium Vehicles</div>
+                </div>
+                <div class="stat animate-fade-in-up">
+                    <span class="stat-number">10</span>
+                    <div class="stat-label">Luxury Brands</div>
+                </div>
+                <div class="stat animate-fade-in-up">
+                    <span class="stat-number">98%</span>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+                <div class="stat animate-fade-in-up">
+                    <span class="stat-number">24/7</span>
+                    <div class="stat-label">Support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Cars Section -->
+    <section id="featured" class="featured-cars">
+        <div class="section-header animate-fade-in-up">
+            <h2 class="section-title">Featured <span class="highlight">Collection</span></h2>
+            <p class="section-subtitle">Discover our handpicked selection of the world's most prestigious and powerful vehicles. Each car represents the pinnacle of automotive excellence.</p>
+        </div>
+
+        <div class="cars-grid" id="featured-cars-grid">
+            <!-- Featured cars will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <!-- Full Catalog Section -->
+    <section id="catalog" class="catalog">
+        <div class="section-header animate-fade-in-up">
+            <h2 class="section-title">Complete <span class="highlight">Catalog</span></h2>
+            <p class="section-subtitle">Browse our extensive collection of premium vehicles. Find your perfect match with our advanced filtering system.</p>
+        </div>
+
+        <div class="catalog-filters">
+            <div class="filter-controls">
+                <input type="text" class="search-box" placeholder="Search by brand or model..." id="search-input">
+                <button class="filter-btn active" data-category="all">All Cars (30)</button>
+                <button class="filter-btn" data-category="luxury">Luxury (12)</button>
+                <button class="filter-btn" data-category="sports">Sports (8)</button>
+                <button class="filter-btn" data-category="supercar">Supercars (10)</button>
+            </div>
+        </div>
+
+        <div class="cars-grid" id="catalog-cars-grid">
+            <!-- All cars will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="section-header animate-fade-in-up">
+            <h2 class="section-title">Premium <span class="highlight">Services</span></h2>
+            <p class="section-subtitle">Experience unparalleled service excellence with our comprehensive luxury automotive solutions.</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card animate-fade-in-up">
+                <div class="service-icon">🏆</div>
+                <h3 class="service-title">Personal Consultation</h3>
+                <p class="service-description">One-on-one guidance from our luxury car specialists to find your perfect match.</p>
+                <ul class="service-features">
+                    <li>Expert Advice</li>
+                    <li>Personalized Recommendations</li>
+                    <li>Virtual Tours</li>
+                    <li>Detailed Analysis</li>
+                </ul>
+            </div>
+
+            <div class="service-card animate-fade-in-up">
+                <div class="service-icon">🛡️</div>
+                <h3 class="service-title">Extended Warranty</h3>
+                <p class="service-description">Comprehensive coverage and protection for your investment with premium warranty options.</p>
+                <ul class="service-features">
+                    <li>Comprehensive Coverage</li>
+                    <li>24/7 Support</li>
+                    <li>Worldwide Protection</li>
+                    <li>Premium Parts</li>
+                </ul>
+            </div>
+
+            <div class="service-card animate-fade-in-up">
+                <div class="service-icon">💳</div>
+                <h3 class="service-title">Financing Solutions</h3>
+                <p class="service-description">Flexible financing options tailored to your needs with competitive rates.</p>
+                <ul class="service-features">
+                    <li>Competitive Rates</li>
+                    <li>Flexible Terms</li>
+                    <li>Quick Approval</li>
+                    <li>Lease Options</li>
+                </ul>
+            </div>
+
+            <div class="service-card animate-fade-in-up">
+                <div class="service-icon">🚚</div>
+                <h3 class="service-title">White Glove Delivery</h3>
+                <p class="service-description">Premium delivery service with detailed inspection and handover process.</p>
+                <ul class="service-features">
+                    <li>Door-to-Door Delivery</li>
+                    <li>Professional Handover</li>
+                    <li>Full Inspection</li>
+                    <li>Documentation</li>
+                </ul>
+            </div>
+
+            <div class="service-card animate-fade-in-up">
+                <div class="service-icon">🔧</div>
+                <h3 class="service-title">Concierge Maintenance</h3>
+                <p class="service-description">Premium maintenance services with certified technicians and genuine parts.</p>
+                <ul class="service-features">
+                    <li>Certified Technicians</li>
+                    <li>Genuine Parts</li>
+                    <li>Pickup & Delivery</li>
+                    <li>Service History</li>
+                </ul>
+            </div>
+
+            <div class="service-card animate-fade-in-up">
+                <div class="service-icon">👥</div>
+                <h3 class="service-title">VIP Experience</h3>
+                <p class="service-description">Exclusive access to events, previews, and luxury automotive experiences.</p>
+                <ul class="service-features">
+                    <li>Exclusive Events</li>
+                    <li>New Model Previews</li>
+                    <li>Track Days</li>
+                    <li>Lifestyle Experiences</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="section-header animate-fade-in-up">
+            <h2 class="section-title">Get In <span class="highlight">Touch</span></h2>
+            <p class="section-subtitle">Ready to find your dream car? Our luxury automotive specialists are here to assist you every step of the way.</p>
+        </div>
+
+        <div class="contact-content">
+            <div class="contact-form animate-slide-in-left">
+                <h3>Send us a message</h3>
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-input" placeholder="john.doe@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-input" placeholder="+1 (555) 123-4567">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Interested In</label>
+                        <select class="form-input">
+                            <option>Select a category</option>
+                            <option>Luxury Sedans</option>
+                            <option>Sports Cars</option>
+                            <option>Supercars</option>
+                            <option>SUVs</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <textarea class="form-input form-textarea" placeholder="Tell us about your dream car..."></textarea>
+                    </div>
+                    <button type="submit" class="cta-btn" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+
+            <div class="contact-info animate-slide-in-right">
+                <div class="contact-item">
+                    <div class="contact-item-header">
+                        <div class="contact-icon">📍</div>
+                        <h4>Visit Our Showroom</h4>
+                    </div>
+                    <p>123 Luxury Boulevard<br>Beverly Hills, CA 90210<br>United States</p>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-item-header">
+                        <div class="contact-icon">📞</div>
+                        <h4>Call Us</h4>
+                    </div>
+                    <p>+1 (555) 123-4567<br>Toll-free: +1 (800) LUXE-CAR<br>International: +1 (555) 987-6543</p>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-item-header">
+                        <div class="contact-icon">📧</div>
+                        <h4>Email Us</h4>
+                    </div>
+                    <p>info@luxemotor.com<br>sales@luxemotor.com<br>support@luxemotor.com</p>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-item-header">
+                        <div class="contact-icon">🕒</div>
+                        <h4>Business Hours</h4>
+                    </div>
+                    <p>Monday - Friday: 9:00 AM - 8:00 PM<br>Saturday: 9:00 AM - 6:00 PM<br>Sunday: 12:00 PM - 5:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>LuxeMotor</h3>
+                <p>Your premier destination for luxury and high-performance vehicles. We curate the world's finest automobiles for discerning clients who demand excellence.</p>
+                <p>📍 123 Luxury Boulevard, Beverly Hills, CA</p>
+                <p>📞 +1 (555) 123-4567</p>
+                <p>📧 info@luxemotor.com</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#home">Home</a></p>
+                <p><a href="#featured">Featured Cars</a></p>
+                <p><a href="#catalog">Full Catalog</a></p>
+                <p><a href="#services">Services</a></p>
+                <p><a href="#contact">Contact</a></p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Categories</h3>
+                <p><a href="#catalog">Luxury Sedans</a></p>
+                <p><a href="#catalog">Sports Cars</a></p>
+                <p><a href="#catalog">Supercars</a></p>
+                <p><a href="#catalog">Electric Vehicles</a></p>
+                <p><a href="#catalog">SUVs & Crossovers</a></p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Luxury Brands</h3>
+                <p>Mercedes-Benz • BMW • Audi • Porsche</p>
+                <p>Ferrari • Lamborghini • Rolls-Royce</p>
+                <p>Bentley • McLaren • Aston Martin</p>
+                <br>
+                <h3>Newsletter</h3>
+                <p>Stay updated with the latest luxury cars and exclusive offers.</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 LuxeMotor. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <button class="scroll-top" id="scrollTop">↑</button>
+
+    <script>
+        // Car data - 30 real luxury cars with 10 featured models
+        const cars = [
+            // Featured Cars (10 main models)
+            {
+                id: 1,
+                name: "Mercedes-Benz S-Class",
+                manufacturer: "Mercedes-Benz",
+                model: "S-Class",
+                year: 2024,
+                price: 145000,
+                category: "luxury",
+                imageUrl:"https://images.unsplash.com/photo-1683290584070-908832e8afe0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBtZXJjZWRlcyUyMGJlbnolMjBjYXJ8ZW58MXx8fHwxNzU4NTYyNzM1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+                features: ["Adaptive Suspension", "Massage Seats", "Burmester Sound", "Night Vision"],
+                engine: "4.0L V8 Biturbo",
+                power: "563 HP",
+                acceleration: "4.4s 0-60 mph",
+                topSpeed: "155 mph",
+                isFeatured: true
+            },
+            {
+                id: 2,
+                name: "BMW 7 Series",
+                manufacturer: "BMW",
+                model: "7 Series",
+                year: 2024,
+                price: 135000,
+                category: "luxury",
+                imageUrl: "https://images.unsplash.com/photo-1731142582229-e0ee70302c02?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxibXclMjBsdXh1cnklMjBzZWRhbnxlbnwxfHx8fDE3NTg1MjIyODl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+                features: ["Executive Lounge", "Harman Kardon Audio", "Laser Headlights", "Gesture Control"],
+                engine: "4.4L V8 TwinTurbo",
+                power: "536 HP",
+                acceleration: "4.5s 0-60 mph",
+                topSpeed: "155 mph",
+                isFeatured: true
+            },
+            {
+                id: 3,
+                name: "Audi A8",
+                manufacturer: "Audi",
+                model: "A8",
+                year: 2024,
+                price: 125000,
+                category: "luxury",
+                imageUrl: "https://images.unsplash.com/photo-1610470876204-a056f96e259c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhdWRpJTIwbHV4dXJ5JTIwY2FyfGVufDF8fHx8MTc1ODU2MjczNnww&ixlib=rb-4.1.0&q=80&w=1080",
+                features: ["Quattro AWD", "Bang & Olufsen 3D", "Matrix LED", "Air Suspension"],
+                engine: "4.0L V8 TFSI",
+                power: "563 HP",
+                acceleration: "4.2s 0-60 mph",
+                topSpeed: "155 mph",
+                isFeatured: true
+            },
+            {
+                id: 4,
+                name: "Porsche 911 Turbo S",
+                manufacturer: "Porsche",
+                model: "911 Turbo S",
+                year: 2024,
+                price: 235000,
+                category: "sports",
+                imageUrl: "https://images.unsplash.com/photo-1693164526787-4963200aba01?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwb3JzY2hlJTIwOTExJTIwc3BvcnRzJTIwY2FyfGVufDF8fHx8MTc1ODU1MTQ2N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+                features: ["PDK Transmission", "Sport Chrono", "PASM Suspension", "Carbon Brakes"],
+                engine: "3.8L Flat-6 Biturbo",
+                power: "640 HP",
+                acceleration: "2.7s 0-60 mph",
+                topSpeed: "205 mph",
+                isFeatured: true
+            },
+            {
+                id: 5,
+                name: "Ferrari 488 Pista",
+                manufacturer: "Ferrari",
+                model: "488 Pista",
+                year: 2024,
+                price: 395000,
+                category: "supercar",
+                imageUrl: "https://images.unsplash.com/photo-1696581081913-3529170053d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmZXJyYXJpJTIwcmVkJTIwc3BvcnRzJTIwY2FyfGVufDF8fHx8MTc1ODQ1OTUxMHww&ixlib=rb-4.1.0&q=80&w=1080",
+                features: ["F1-Trac System", "Side Slip Control", "Carbon Fiber Body", "Alcantara Interior"],
+                engine: "3.9L V8 Biturbo",
+                power: "710 HP",
+                acceleration: "2.85s 0-60 mph",
+                topSpeed: "211 mph",
+                isFeatured: true
+            },
+            {
+                id: 6,
+                name: "Lamborghini Huracán EVO",
+                manufacturer: "Lamborghini",
+                model: "Huracán EVO",
+                year: 2024,
+                price: 285000,
+                category: "supercar",
+                imageUrl: "https://images.unsplash.com/photo-1703088775850-efe49d76c5dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYW1ib3JnaGluaSUyMGx1eHVyeSUyMHN1cGVyY2FyfGVufDF8fHx8MTc1ODU2MjczOXww&ixlib=rb-4.1.0&q=80&w=1080",
+                features: ["LDVI System", "All-Wheel Drive", "Carbon Ceramic Brakes", "Dynamic Steering"],
+                engine: "5.2L V10",
+                power: "631 HP",
+                acceleration: "2.9s 0-60 mph",
+                topSpeed: "202 mph",
+                isFeatured: true
+            },
+            {
+                id: 7,
+                name: "Rolls-Royce Phantom",
+                manufacturer: "Rolls-Royce",
+                model: "Phantom",
+                year: 2024,
+                price: 485000,
+                category: "luxury",
+                imageUrl: "https://images.unsplash.com/photo-1740098160485-d098fbf42814?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                features: ["Magic Carpet Ride", "Bespoke Audio", "Starlight Headliner", "Champagne Cooler"],
+                engine: "6.75L V12 Twin-Turbo",
+                power: "563 HP",
+                acceleration: "5.1s 0-60 mph",
+                topSpeed: "155 mph",
+                isFeatured: true
+            },
+            {
+                id: 8,
+                name: "Bentley Continental GT",
+                manufacturer: "Bentley",
+                model: "Continental GT",
+                year: 2024,
+                price: 245000,
+                category: "luxury",
+                imageUrl: "https://images.unsplash.com/photo-1725181937728-3fc2a314411a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZW50bGV5JTIwbHV4dXJ5JTIwY2FyfGVufDF8fHx8MTc1ODUyMjI5MHww&ixlib=rb-4.1.0&q=80&w=1080",
+                features: ["Diamond Quilted Leather", "Naim Audio", "All-Wheel Drive", "Adaptive Chassis"],
+                engine: "6.0L W12 Twin-Turbo",
+                power: "626 HP",
+                acceleration: "3.6s 0-60 mph",
+                topSpeed: "207 mph",
+                isFeatured: true
+            },
+            {
+                id: 9,
+                name: "McLaren 720S",
+                manufacturer: "McLaren",
+                model: "720S",
+                year: 2024,
+                price: 325000,
+                category: "supercar",
+                imageUrl: "https://images.unsplash.com/photo-1666172015212-ad93473440ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtY2xhcmVuJTIwc3BvcnRzJTIwY2FyfGVufDF8fHx8MTc1ODU0MjE4M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+                features: ["Proactive Chassis Control", "Dihedral Doors", "Carbon Monocage", "Track Telemetry"],
+                engine: "4.0L V8 Twin-Turbo",
+                power: "710 HP",
+                acceleration: "2.8s 0-60 mph",
+                topSpeed: "212 mph",
+                isFeatured: true
+            },
+            {
+                id: 10,
+                name: "Aston Martin DB11",
+                manufacturer: "Aston Martin",
+                model: "DB11",
+                year: 2024,
+                price: 235000,
+                category: "luxury",
+                imageUrl: "https://plus.unsplash.com/premium_photo-1737559694560-1227c63d0885?q=80&w=812&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                features: ["Bang & Olufsen BeoSound", "Carbon Fiber Trim", "Adaptive Dampers", "Launch Control"],
+                engine: "4.0L V8 Twin-Turbo",
+                power: "503 HP",
+                acceleration: "4.0s 0-60 mph",
+                topSpeed: "187 mph",
+                isFeatured: true
+            },
+            // Additional cars to reach 30 total
+            {
+                id: 11,
+                name: "Mercedes-Benz AMG GT 63 S",
+                manufacturer: "Mercedes-Benz",
+                model: "AMG GT 63 S",
+                year: 2023,
+                price: 185000,
+                category: "sports",
+                imageUrl: "https://images.unsplash.com/photo-1596321687344-547d323f094a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWVyY2VkZXMlMjBiZW56JTIwYW1nJTIwNjN8ZW58MHx8MHx8fDA%3D",
+                features: ["AMG Performance 4MATIC+", "AMG Ride Control", "Track Pace", "AMG Sound"],
+                engine: "4.0L V8 Biturbo",
+                power: "630 HP",
+                acceleration: "3.1s 0-60 mph",
+                topSpeed: "195 mph"
+            },
+            {
+                id: 12,
+                name: "BMW M8 Competition",
+                manufacturer: "BMW",
+                model: "M8 Competition",
+                year: 2023,
+                price: 175000,
+                category: "sports",
+                imageUrl: "https://images.unsplash.com/photo-1728061442220-9518b5eddac4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Ym13JTIwbTh8ZW58MHx8MHx8fDA%3D",
+                features: ["M xDrive", "Active M Differential", "M Compound Brakes", "M Performance Exhaust"],
+                engine: "4.4L V8 TwinTurbo",
+                power: "617 HP",
+                acceleration: "3.0s 0-60 mph",
+                topSpeed: "190 mph"
+            },
+            {
+                id: 13,
+                name: "Audi RS8",
+                manufacturer: "Audi",
+                model: "RS8",
+                year: 2023,
+                price: 165000,
+                category: "sports",
+                imageUrl: "https://images.unsplash.com/photo-1721447413616-3d6f9393f3be?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fEF1ZGklMjBSUzh8ZW58MHx8MHx8fDA%3D",
+                features: ["RS Sport Suspension", "Dynamic Ride Control", "RS Exhaust", "Sport Differential"],
+                engine: "4.0L V8 TFSI",
+                power: "591 HP",
+                acceleration: "3.3s 0-60 mph",
+                topSpeed: "190 mph"
+            },
+            {
+                id: 14,
+                name: "Porsche 911 Carrera S",
+                manufacturer: "Porsche",
+                model: "911 Carrera S",
+                year: 2023,
+                price: 155000,
+                category: "sports",
+                imageUrl: "https://images.unsplash.com/photo-1564694457220-0efef1a70d6d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fFBvcnNjaGUlMjA5MTElMjBDYXJyZXJhJTIwU3xlbnwwfHwwfHx8MA%3D%3D",
+                features: ["PDK Transmission", "Sport Chrono Package", "PASM", "Sport Exhaust"],
+                engine: "3.0L Flat-6 Biturbo",
+                power: "443 HP",
+                acceleration: "3.5s 0-60 mph",
+                topSpeed: "191 mph"
+            },
+            {
+                id: 15,
+                name: "Ferrari F8 Tributo",
+                manufacturer: "Ferrari",
+                model: "F8 Tributo",
+                year: 2023,
+                price: 365000,
+                category: "supercar",
+                imageUrl: "https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8RmVycmFyaSUyMEY4JTIwVHJpYnV0b3xlbnwwfHwwfHx8MA%3D%3D",
+                features: ["Side Slip Control 6.1", "F1-Trac", "Electronic Differential", "Manettino"],
+                engine: "3.9L V8 Biturbo",
+                power: "710 HP",
+                acceleration: "2.9s 0-60 mph",
+                topSpeed: "211 mph"
+            },
+            {
+                id: 16,
+                name: "Lamborghini Aventador SVJ",
+                manufacturer: "Lamborghini",
+                model: "Aventador SVJ",
+                year: 2023,
+                price: 525000,
+                category: "supercar",
+                imageUrl: "https://images.unsplash.com/photo-1687297476070-414ee683f67a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TGFtYm9yZ2hpbmklMjBBdmVudGFkb3IlMjBTVkp8ZW58MHx8MHx8fDA%3D",
+                features: ["ALA 2.0", "Magneto Rheological Suspension", "Carbon Fiber Monocoque", "Pirelli P Zero Corsa"],
+                engine: "6.5L V12",
+                power: "759 HP",
+                acceleration: "2.8s 0-60 mph",
+                topSpeed: "217 mph"
+            },
+            {
+                id: 17,
+                name: "Rolls-Royce Cullinan",
+                manufacturer: "Rolls-Royce",
+                model: "Cullinan",
+                year: 2023,
+                price: 425000,
+                category: "luxury",
+                imageUrl: "https://images.unsplash.com/photo-1687634365968-0e74fbd87419?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Um9sbHMlMjBSb3ljZSUyMEN1bGxpbmFufGVufDB8fDB8fHww",
+                features: ["All-Terrain Progress Control", "Self-Leveling Suspension", "Viewing Suite", "Recreation Module"],
+                engine: "6.75L V12 Twin-Turbo",
+                power: "563 HP",
+                acceleration: "4.8s 0-60 mph",
+                topSpeed: "155 mph"
+            },
+            {
+                id: 18,
+                name: "Bentley Bentayga Speed",
+                manufacturer: "Bentley",
+                model: "Bentayga Speed",
+                year: 2023,
+                price: 285000,
+                category: "luxury",
+                imageUrl: "https://images.unsplash.com/photo-1658593105931-3900ad253607?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8QmVudGxleSUyMEJlbnRheWdhfGVufDB8fDB8fHww",
+                features: ["Bentley Dynamic Ride", "All-Terrain Specification", "Mulliner Driving Specification", "Naim Audio"],
+                engine: "6.0L W12 Twin-Turbo",
+                power: "626 HP",
+                acceleration: "3.8s 0-60 mph",
+                topSpeed: "190 mph"
+            },
+            {
+                id: 19,
+                name: "McLaren Artura",
+                manufacturer: "McLaren",
+                model: "Artura",
+                year: 2023,
+                price: 295000,
+                category: "supercar",
+                imageUrl: "https://images.unsplash.com/photo-1745736215025-d8dd0d9b771e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8TWNMYXJlbiUyMEFydHVyYXxlbnwwfHwwfHx8MA%3D%3D",
+                features: ["McLaren Carbon Lightweight Architecture", "E-Differential", "Proactive Dampers", "Hybrid Power"],
+                engine: "3.0L V6 Twin-Turbo Hybrid",
+                power: "671 HP",
+                acceleration: "3.0s 0-60 mph",
+                topSpeed: "205 mph"
+            },
+            {
+                id: 20,
+                name: "Aston Martin DBS Superleggera",
+                manufacturer: "Aston Martin",
+                model: "DBS Superleggera",
+                year: 2023,
+                price: 365000,
+                category: "supercar",
+                imageUrl: "https://images.unsplash.com/photo-1618486613527-d8bffc644711?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhc3RvbiUyMG1hcnRpbiUyMGx1eHVyeSUyMGNhcnxlbnwxfHx8fDE3NTg1NDQ5ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+                features: ["Carbon Fiber Construction", "Adaptive Dampers", "Carbon Ceramic Brakes", "Quad Exhaust"],
+                engine: "5.2L V12 Twin-Turbo",
+                power: "715 HP",
+                acceleration: "3.4s 0-60 mph",
+                topSpeed: "211 mph"
+            },
+            {
+                id: 21,
+                name: "Mercedes-Benz G63 AMG",
+                manufacturer: "Mercedes-Benz",
+                model: "G63 AMG",
+                year: 2024,
+                price: 195000,
+                category: "luxury",
+                imageUrl: "https://images.unsplash.com/photo-1709072244556-acb7e36c0770?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8TWVyY2VkZXMlMjBCZW56JTIwRzYzJTIwQU1HfGVufDB8fDB8fHww",
+                features: ["AMG Performance 4MATIC", "AMG Ride Control", "Off-Road Package", "Burmester 3D"],
+                engine: "4.0L V8 Biturbo",
+                power: "577 HP",
+                acceleration: "4.5s 0-60 mph",
+                topSpeed: "149 mph"
+            },
+            {
+                id: 22,
+                name: "BMW X7 M50i",
+                manufacturer: "BMW",
+                model: "X7 M50i",
+                year: 2024,
+                price: 115000,
+                category: "luxury",
+                imageUrl: "https://images.unsplash.com/photo-1706237181208-c0e274da366e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fEJNVyUyMFg3JTIwTTUwaXxlbnwwfHwwfHx8MA%3D%3D",
+                features: ["xDrive AWD", "Executive Package", "Harman Kardon", "Panoramic Roof"],
+                engine: "4.4L V8 TwinTurbo",
+                power: "523 HP",
+                acceleration: "4.7s 0-60 mph",
+                topSpeed: "155 mph"
+            },
+            {
+                id: 23,
+                name: "Audi R8 V10 Plus",
+                manufacturer: "Audi",
+                model: "R8 V10 Plus",
+                year: 2024,
+                price: 225000,
+                category: "supercar",
+                imageUrl: "https://images.unsplash.com/photo-1625755413847-5e2704befe69?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8QXVkaSUyMFI4JTIwVjEwJTIwUGx1c3xlbnwwfHwwfHx8MA%3D%3D",
+                features: ["Quattro AWD", "Virtual Cockpit Plus", "Bang & Olufsen", "Carbon Fiber Package"],
+                engine: "5.2L V10",
+                power: "602 HP",
+                acceleration: "3.2s 0-60 mph",
+                topSpeed: "205 mph"
+            },
+            {
+                id: 24,
+                name: "Porsche Taycan Turbo S",
+                manufacturer: "Porsche",
+                model: "Taycan Turbo S",
+                year: 2024,
+                price: 205000,
+                category: "luxury",
+                imageUrl: "https://images.unsplash.com/photo-1708885959562-8fd3be5f4036?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8UG9yc2NoZSUyMFRheWNhbiUyMFR1cmJvJTIwU3xlbnwwfHwwfHx8MA%3D%3D",
+                features: ["800V Architecture", "Air Suspension", "Porsche Communication Management", "Launch Control"],
+                engine: "Dual Electric Motors",
+                power: "750 HP",
+                acceleration: "2.6s 0-60 mph",
+                topSpeed: "161 mph"
+            },
+            {
+                id: 25,
+                name: "Ferrari Roma",
+                manufacturer: "Ferrari",
+                model: "Roma",
+                year: 2024,
+                price: 275000,
+                category: "luxury",
+                imageUrl: "https://images.unsplash.com/photo-1687599891000-cf8af5ae4386?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8RmVycmFyaSUyMFJvbWF8ZW58MHx8MHx8fDA%3D",
+                features: ["8.4\" Touchscreen", "Dual Cockpit Design", "Manettino Dial", "Side Slip Control"],
+                engine: "3.9L V8 Biturbo",
+                power: "612 HP",
+                acceleration: "3.4s 0-60 mph",
+                topSpeed: "199 mph"
+            },
+            {
+                id: 26,
+                name: "Lamborghini Gallardo",
+                manufacturer: "Lamborghini",
+                model: "Gallardo",
+                year: 2022,
+                price: 265000,
+                category: "supercar",
+                imageUrl: "https://images.unsplash.com/photo-1543854589-fdd815f176e0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8TGFtYm9yZ2hpbmklMjBHYWxsYXJkb3xlbnwwfHwwfHx8MA%3D%3D",
+                features: ["E-Gear Transmission", "Lifting System", "Carbon Fiber Interior", "Bi-Xenon Headlights"],
+                engine: "5.2L V10",
+                power: "552 HP",
+                acceleration: "3.7s 0-60 mph",
+                topSpeed: "196 mph"
+            },
+            {
+                id: 27,
+                name: "Rolls-Royce Ghost",
+                manufacturer: "Rolls-Royce",
+                model: "Ghost",
+                year: 2024,
+                price: 385000,
+                category: "luxury",
+                imageUrl: "https://images.unsplash.com/photo-1647200528165-12fc669c247e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Um9sbHMlMjBSb3ljZSUyMEdob3N0fGVufDB8fDB8fHww",
+                features: ["Planar Suspension", "Bespoke Audio", "Illuminated Fascia", "Spirit of Ecstasy"],
+                engine: "6.75L V12 Twin-Turbo",
+                power: "563 HP",
+                acceleration: "4.6s 0-60 mph",
+                topSpeed: "155 mph"
+            },
+            {
+                id: 28,
+                name: "Bentley Mulsanne",
+                manufacturer: "Bentley",
+                model: "Mulsanne",
+                year: 2023,
+                price: 365000,
+                category: "luxury",
+                imageUrl: "https://images.unsplash.com/photo-1725181937728-3fc2a314411a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZW50bGV5JTIwbHV4dXJ5JTIwY2FyfGVufDF8fHx8MTc1ODUyMjI5MHww&ixlib=rb-4.1.0&q=80&w=1080",
+                features: ["Hand-Crafted Interior", "Naim for Bentley", "Executive Rear Seating", "Mulliner Specifications"],
+                engine: "6.75L V8 Twin-Turbo",
+                power: "505 HP",
+                acceleration: "5.1s 0-60 mph",
+                topSpeed: "184 mph"
+            },
+            {
+                id: 29,
+                name: "McLaren 600LT",
+                manufacturer: "McLaren",
+                model: "600LT",
+                year: 2023,
+                price: 275000,
+                category: "supercar",
+                imageUrl: "https://images.unsplash.com/photo-1606402119544-029f37bb144d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fE1jTGFyZW4lMjA2MDBMVHxlbnwwfHwwfHx8MA%3D%3D",
+                features: ["Longtail Aerodynamics", "Track-Focused Setup", "Carbon Fiber Seats", "Top-Exit Exhaust"],
+                engine: "3.8L V8 Twin-Turbo",
+                power: "592 HP",
+                acceleration: "2.9s 0-60 mph",
+                topSpeed: "204 mph"
+            },
+            {
+                id: 30,
+                name: "Aston Martin Vantage",
+                manufacturer: "Aston Martin",
+                model: "Vantage",
+                year: 2024,
+                price: 185000,
+                category: "sports",
+                imageUrl: "https://images.unsplash.com/photo-1701762750996-15042ca823ad?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fEFzdG9uJTIwTWFydGluJTIwVmFudGFnZXxlbnwwfHwwfHx8MA%3D%3D",
+                features: ["Adaptive Dampers", "Limited Slip Differential", "Launch Control", "Sports Plus Mode"],
+                engine: "4.0L V8 Twin-Turbo",
+                power: "503 HP",
+                acceleration: "3.5s 0-60 mph",
+                topSpeed: "195 mph"
+            }
+        ];
+
+        // Featured cars (first 10)
+        const featuredCars = cars.filter(car => car.isFeatured);
+
+        // Create car card HTML
+        function createCarCard(car) {
+            return `
+                <div class="car-card" data-category="${car.category}" data-name="${car.name.toLowerCase()}" data-manufacturer="${car.manufacturer.toLowerCase()}">
+                    <div class="car-image" style="background-image: url('${car.imageUrl}')">
+                        <div class="car-badge">${car.category.toUpperCase()}</div>
+                    </div>
+                    <div class="car-info">
+                        <div class="car-header">
+                            <div>
+                                <div class="car-name">${car.name}</div>
+                                <div class="car-details">${car.year} • ${car.manufacturer}</div>
+                            </div>
+                            <div class="car-price">$${car.price.toLocaleString()}</div>
+                        </div>
+                        
+                        <div class="car-specs">
+                            <div class="spec">
+                                <span class="spec-label">Power</span>
+                                <div class="spec-value">${car.power}</div>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-label">0-60 mph</span>
+                                <div class="spec-value">${car.acceleration}</div>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-label">Top Speed</span>
+                                <div class="spec-value">${car.topSpeed}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="car-features">
+                            ${car.features.slice(0, 3).map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+                            ${car.features.length > 3 ? `<span class="feature-tag">+${car.features.length - 3} more</span>` : ''}
+                        </div>
+                        
+                        <button class="cta-btn" style="width: 100%; margin-top: 1rem;">View Details</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Populate featured cars
+        function populateFeaturedCars() {
+            const featuredGrid = document.getElementById('featured-cars-grid');
+            featuredGrid.innerHTML = featuredCars.map(createCarCard).join('');
+        }
+
+        // Populate all cars
+        function populateAllCars() {
+            const catalogGrid = document.getElementById('catalog-cars-grid');
+            catalogGrid.innerHTML = cars.map(createCarCard).join('');
+        }
+
+        // Filter functionality
+        let currentCategory = 'all';
+        let searchQuery = '';
+
+        function filterCars() {
+            const allCarCards = document.querySelectorAll('#catalog-cars-grid .car-card');
+            
+            allCarCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                const cardName = card.getAttribute('data-name');
+                const cardManufacturer = card.getAttribute('data-manufacturer');
+                
+                const matchesCategory = currentCategory === 'all' || cardCategory === currentCategory;
+                const matchesSearch = searchQuery === '' || 
+                    cardName.includes(searchQuery.toLowerCase()) || 
+                    cardManufacturer.includes(searchQuery.toLowerCase());
+                
+                if (matchesCategory && matchesSearch) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            populateFeaturedCars();
+            populateAllCars();
+
+            // Filter buttons
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCategory = this.getAttribute('data-category');
+                    filterCars();
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('search-input');
+            searchInput.addEventListener('input', function() {
+                searchQuery = this.value;
+                filterCars();
+            });
+
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Scroll to top button
+            const scrollTopBtn = document.getElementById('scrollTop');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+            });
+
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Animation on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationDelay = '0s';
+                        entry.target.classList.add('animate-fade-in-up');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            document.querySelectorAll('.section-header, .service-card, .contact-item').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

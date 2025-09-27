@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeMotors — Premium Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<style>
+    /* ========== RESET & BASE ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #f4f4f4;
+    background-color: #07090b;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ========== HEADER ========== */
+.header {
+    position: fixed;
+    width: 100%;
+    background: rgba(0,0,0,0.7);
+    padding: 1rem 0;
+    z-index: 1000;
+}
+.header-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #d4af37;
+}
+.nav-list {
+    display: flex;
+    list-style: none;
+}
+.nav-list li {
+    margin-left: 2rem;
+}
+.nav-list li a {
+    font-weight: 500;
+    transition: 0.3s;
+}
+.nav-list li a:hover {
+    color: #e6c558;
+}
+.menu-toggle {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+/* ========== HERO SECTION ========== */
+.hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+.hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.hero-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    animation: fadeIn 2s ease-in-out;
+}
+.hero-overlay h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+.hero-overlay p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+.btn {
+    display: inline-block;
+    background: #d4af37;
+    color: #07090b;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+.btn:hover {
+    background: #e6c558;
+}
+
+/* ========== SECTIONS ========== */
+.section {
+    padding: 6rem 0 3rem;
+}
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #d4af37;
+}
+
+/* ========== SERVICES CARDS ========== */
+.service-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+.card {
+    background: #0f1315;
+    border-radius: 16px;
+    overflow: hidden;
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.card h3 {
+    margin: 1rem 0;
+}
+.card p {
+    padding: 0 1rem 1rem;
+    font-size: 0.9rem;
+    color: #9aa0a6;
+}
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.5);
+}
+
+/* ========== ABOUT SECTION ========== */
+.about-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+}
+.about-image img {
+    width: 100%;
+    border-radius: 16px;
+}
+.about-text {
+    max-width: 600px;
+}
+.about-text h2 {
+    margin-bottom: 1rem;
+}
+.about-text p {
+    margin-bottom: 1.5rem;
+    color: #9aa0a6;
+}
+
+/* ========== CONTACT SECTION ========== */
+.contact-container {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+}
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+.contact-form button {
+    width: 100%;
+    cursor: pointer;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+    background: #0f1315;
+    text-align: center;
+    padding: 2rem 0;
+    color: #9aa0a6;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .nav-list {
+        position: absolute;
+        top: 70px;
+        right: -100%;
+        flex-direction: column;
+        background: rgba(0,0,0,0.9);
+        width: 200px;
+        text-align: center;
+        transition: right 0.3s;
+    }
+    .nav-list.nav-active {
+        right: 0;
+    }
+    .nav-list li {
+        margin: 1.5rem 0;
+    }
+    .menu-toggle {
+        display: block;
+        color: #d4af37;
+    }
+    .about-container {
+        flex-direction: column;
+    }
+    .hero-overlay h2 {
+        font-size: 2rem;
+    }
+}
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+</style>
+
+    <!-- Header / Navigation -->
+    <header class="header">
+        <div class="container header-container">
+            <h1 class="logo">LuxeMotors</h1>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="model.html">Models</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <video autoplay loop class="hero-video">
+            <source src="Car images/Nur.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay">
+            <h2>Premium Car Services</h2>
+            <p>Experience the ultimate care for your luxury vehicle</p>
+            <a href="#services" class="btn">Explore Services</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services section">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="service-cards">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FyJTIwcmVwYWlyfGVufDB8fDB8fHww" alt="Car Repair">
+                    <h3>Premium Repairs</h3>
+                    <p>Expert repairs for all luxury car models with genuine parts.</p>
+                </div>
+                <div class="card">
+                    <img src="https://plus.unsplash.com/premium_photo-1682142564647-6f4396a34d02?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y2FyJTIwd2FzaHxlbnwwfHwwfHx8MA%3D%3D" alt="Car Wash">
+                    <h3>Luxury Detailing</h3>
+                    <p>High-end detailing to keep your car shining like new.</p>
+                </div>
+                <div class="card">
+                    <img src="https://media.istockphoto.com/id/1349412663/photo/supervisor-at-a-car-workshop-checking-tablet-while-mechanic-works-at-background-on-a-car.webp?a=1&b=1&s=612x612&w=0&k=20&c=Mi4PmMNtdhwbK4r36X5WW92YIpAL6FeY3doL2aTbYMk=" alt="Car Maintenance">
+                    <h3>Scheduled Maintenance</h3>
+                    <p>Professional maintenance plans tailored to your car’s needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+        <div class="container about-container">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1455849318743-b2233052fcff?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8QWJvdXR8ZW58MHx8MHx8fDA%3D" alt="About LuxeMotors">
+            </div>
+            <div class="about-text">
+                <h2>About LuxeMotors</h2>
+                <p>At LuxeMotors, we provide unmatched luxury car services. Our trained technicians and state-of-the-art facilities ensure your vehicle receives the best care possible.</p>
+                <a href="#contact" class="btn">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+        <div class="container contact-container">
+            <h2 class="section-title">Contact Us</h2>
+            <p>Reach out to book your service or for any queries.</p>
+            <form class="contact-form">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 LuxeMotors. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JS for menu toggle -->
+    <script>
+        const toggle = document.getElementById('menu-toggle');
+        const nav = document.querySelector('.nav-list');
+        toggle.addEventListener('click', () => {
+            nav.classList.toggle('nav-active');
+        });
+    </script>
+</body>
+</html>
